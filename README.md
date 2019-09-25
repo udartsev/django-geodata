@@ -6,11 +6,7 @@ Django app to add GEO data [Countries, Cities, Time Zones, Geo Points and their 
 `pip require django-geodata`
 
 ***
-2) Seed geo data for example Russia (contry code = RU) data or use US, GB, FR, DE or other valid country code
-`python manage.py seetcountry RU` 
-
-***
-3) Add to your django `settings.py` file database connection settings for **geodata** table: 
+2) Add to your django `settings.py` file database connection settings for **geodata** table: 
 
         DATABASE_ROUTERS = ['geodata.databaserouter.GeodataRouter']
         DATABASE_APPS_MAPPING = {'geodata': 'geodata'}
@@ -24,6 +20,13 @@ Django app to add GEO data [Countries, Cities, Time Zones, Geo Points and their 
             'PORT': '5432'
         }
 ***
+3) In `settings.py` register **geodata** in Django Apps list:
+        
+        INSTALLED_APPS = [
+        	'geodata'
+        ]
+
+***
 4)  Add to your django `urls.py`:
 
         urlpatterns = [
@@ -31,4 +34,8 @@ Django app to add GEO data [Countries, Cities, Time Zones, Geo Points and their 
         ]
 
 ***
-5) `python manage.py runserver`
+5) Seed geo data for example Russia (contry code = RU) data or use US, GB, FR, DE or other valid country code
+`python manage.py seedcountry RU` 
+
+***
+6) `python manage.py runserver`
