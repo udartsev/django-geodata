@@ -1,6 +1,6 @@
 include LICENSE
 include README.md
-recursive-include geodata *
+recursive-include *
 global-exclude __pycache__
 global-exclude *.py[co]
 global-exclude data/*

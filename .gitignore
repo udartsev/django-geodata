@@ -1,1 +1,6 @@
 data/*
+build
+dict
+django_geodata.egg-info
+__pycache__
+
