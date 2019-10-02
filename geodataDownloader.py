@@ -58,17 +58,19 @@ class GeodataDownloader():
         self.msg('[OK]', True)
 
     def downloadAdmin1Codes(self):
-        self.msg('Downloading admin1Codes file... [%s] ' % self.code)
+        file = 'admin1CodesASCII.txt'
+
+        self.msg('Downloading %s file... [%s] ' % (file, self.code))
         http = urllib3.PoolManager()
 
         # Download and unzip main file
         folder = self.folder
-        filename = folder + 'admin1CodesASCII.txt'
+        filename = folder + file
         if not os.path.exists(folder):
             os.makedirs(folder)
 
         if not os.path.exists(filename):
-            response = http.request('GET', self.geoname + filename, preload_content=False)
+            response = http.request('GET', self.geoname + file, preload_content=False)
             with open(filename, 'wb') as f:
                 f.write(response.data)
 
@@ -76,17 +78,19 @@ class GeodataDownloader():
         self.msg('[OK]', True)
 
     def downloadAdmin2Codes(self):
+        file = 'admin2Codes.txt'
+
         self.msg('Downloading admin2Codes file... [%s] ' % self.code)
         http = urllib3.PoolManager()
 
         # Download and unzip main file
         folder = self.folder
-        filename = folder + 'admin2Codes.txt'
+        filename = folder + file
         if not os.path.exists(folder):
             os.makedirs(folder)
 
         if not os.path.exists(filename):
-            response = http.request('GET', self.geoname + filename, preload_content=False)
+            response = http.request('GET', self.geoname + file, preload_content=False)
             with open(filename, 'wb') as f:
                 f.write(response.data)
 
@@ -94,17 +98,19 @@ class GeodataDownloader():
         self.msg('[OK]', True)
 
     def downloadTimeZones(self):
+        file = 'timeZones.txt'
+
         self.msg('Downloading timeZones file... [%s] ' % self.code)
         http = urllib3.PoolManager()
 
         # Download and unzip main file
         folder = self.folder
-        filename = folder + 'timeZones.txt'
+        filename = folder + file
         if not os.path.exists(folder):
             os.makedirs(folder)
 
         if not os.path.exists(filename):
-            response = http.request('GET', self.geoname + filename, preload_content=False)
+            response = http.request('GET', self.geoname + file, preload_content=False)
             with open(filename, 'wb') as f:
                 f.write(response.data)
 
@@ -112,17 +118,19 @@ class GeodataDownloader():
         self.msg('[OK]', True)
 
     def downloadFeatureCodes(self):
+        file = 'featureCodes_%s.txt' % self.code.lower()
+
         self.msg('Downloading featureCodes file... [%s] ' % self.code)
         http = urllib3.PoolManager()
 
         # Download and unzip main file
         folder = self.folder
-        filename = folder + 'featureCodes_%s.txt' % self.code.lower()
+        filename = folder + file
         if not os.path.exists(folder):
             os.makedirs(folder)
 
         if not os.path.exists(filename):
-            response = http.request('GET', self.geoname + filename, preload_content=False)
+            response = http.request('GET', self.geoname + file, preload_content=False)
             with open(filename, 'wb') as f:
                 f.write(response.data)
 

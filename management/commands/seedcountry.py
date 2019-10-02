@@ -4,6 +4,7 @@ from os import listdir
 import sys
 from geodata.geodataDownloader import GeodataDownloader
 from geodata.geodataMainSeeder import GeodataMainSeeder
+from geodata.geodataAltSeeder import GeodataAltSeeder
 
 
 class Command(BaseCommand):
@@ -30,18 +31,26 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-
+        #############################
+        # 1. WELCOME MESSAGE
+        #############################
         # Print welcome message_from_bytes(s, _class=email.message.Message, *, policy=policy.compat32)
         print("/########################################################################/")
         print("/########################  GEODATA FOR DJANGO  ##########################/")
         print("/########################################################################/")
 
+        #############################
+        # 2. GETTING VARS
+        #############################
         self.code = str(options['countryCode']).upper()
         # self.conn =
 
         if self.code is None:
             raise CommandError('Country "%s" does not exist' % self.code)
 
+        #############################
+        # 3. DOWNLOAD RAW FILES
+        #############################
         d = GeodataDownloader(self.code)
         d.downloadMainFile()
         d.downloadAltFile()
@@ -51,7 +60,7 @@ class Command(BaseCommand):
         d.downloadFeatureCodes()
 
         #############################
-        # PostgreSQL SETTINGS
+        # 4. SET DATABASE SETTINGS
         #############################
         db = {}
         db['name'] = 'geodata'
@@ -59,8 +68,15 @@ class Command(BaseCommand):
         db['password'] = 'Postgres911!'
         db['host'] = 'localhost'
 
-        GeodataMainSeeder(self.code, db).seed()
+        #############################
+        # 5. SEED DATA TO DATABASE
+        #############################
+        #GeodataMainSeeder(self.code, db).seed()  #OK
+        GeodataAltSeeder(self.code, db).seed()
 
+        #############################
+        # __. DELETE RAW FILES
+        #############################
         # self.deleteTxt('./main/')
         # self.deleteTxt('./alt/')
 
